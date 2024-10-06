@@ -18,12 +18,13 @@ int main(int argc, char *argv[]) {
 
   app.lock_texture(texture, &pixels, &pitch);
 
-  Rectangle rect(100, 100, 32, 32);
-  rect.draw(pixels, pitch);
+  Rectangle rect(50, 50, 32, 32);
+  // rect.draw(pixels, pitch);
+  rect.animate(pixels, pitch, 640, 480);
 
   app.unlock_texture(texture);
 
-  app.main_loop(window, renderer, texture);
+  app.main_loop(window, renderer, texture, rect, true);
 
   return 0;
 }

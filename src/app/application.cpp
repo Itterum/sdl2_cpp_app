@@ -19,7 +19,8 @@ int Application::init() {
 }
 
 void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                            SDL_Texture *texture) {
+                            SDL_Texture *texture, Rectangle &rect,
+                            bool animate) {
   bool quit = false;
   SDL_Event e;
 
@@ -31,9 +32,24 @@ void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
       }
     }
 
+    void *pixels = getPixels();
+    int pitch = getPitch();
+
+    lock_texture(texture, &pixels, &pitch);
+
+    memset(pixels, 0, 480 * pitch);
+
+    if (animate) {
+      rect.animate(pixels, pitch, 640, 480);
+    }
+
+    unlock_texture(texture);
+
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
+
+    SDL_Delay(10);
   }
 
   SDL_DestroyTexture(texture);

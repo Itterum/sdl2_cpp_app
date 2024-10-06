@@ -10,6 +10,7 @@ public:
   ~Rectangle();
 
   void shape(cairo_t *cr) override;
+  void animate(void *pixels, int pitch, int window_width, int window_height);
 
 private:
   int point_x;

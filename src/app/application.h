@@ -1,6 +1,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "../components/rect/rectangle.h"
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
 #include <cstddef>
@@ -13,7 +14,7 @@ public:
 
   int init();
   void main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                 SDL_Texture *texture);
+                 SDL_Texture *texture, Rectangle &rect, bool animate);
   void lock_texture(SDL_Texture *texture, void **pixels, int *pitch);
   void unlock_texture(SDL_Texture *texture);
 
