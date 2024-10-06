@@ -3,6 +3,8 @@
 
 #include "../shape/shape.h"
 #include <cairo/cairo.h>
+#include <cmath>
+#include <iostream>
 
 class Rectangle : public Shape {
 public:
@@ -10,13 +12,6 @@ public:
   ~Rectangle();
 
   void shape(cairo_t *cr) override;
-  void animate(void *pixels, int pitch, int window_width, int window_height);
-
-private:
-  int point_x;
-  int point_y;
-  int width;
-  int height;
 };
 
 #endif

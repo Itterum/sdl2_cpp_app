@@ -16,6 +16,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/components
   ${CMAKE_SOURCE_DIR}/src/components/rect
   ${CMAKE_SOURCE_DIR}/src/components/shape
+  ${CMAKE_SOURCE_DIR}/src/components/circle
 )
 
 add_executable(
@@ -24,6 +25,7 @@ add_executable(
   src/app/application.cpp
   src/components/shape/shape.cpp
   src/components/rect/rectangle.cpp
+  src/components/circle/circle.cpp
 )
 
 target_link_libraries(main ${CAIRO_LIBRARIES} ${SDL2_LIBRARIES})

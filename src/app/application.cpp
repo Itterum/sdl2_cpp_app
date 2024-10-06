@@ -19,7 +19,7 @@ int Application::init() {
 }
 
 void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                            SDL_Texture *texture, Rectangle &rect,
+                            SDL_Texture *texture, std::vector<Shape *> &shapes,
                             bool animate) {
   bool quit = false;
   SDL_Event e;
@@ -40,7 +40,9 @@ void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
     memset(pixels, 0, 480 * pitch);
 
     if (animate) {
-      rect.animate(pixels, pitch, 640, 480);
+      for (Shape *shape : shapes) {
+        shape->animate(pixels, pitch, 640, 480);
+      }
     }
 
     unlock_texture(texture);

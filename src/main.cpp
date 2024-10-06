@@ -1,4 +1,5 @@
 #include "app/application.h"
+#include "components/circle/circle.h"
 #include "components/rect/rectangle.h"
 
 int main(int argc, char *argv[]) {
@@ -18,13 +19,17 @@ int main(int argc, char *argv[]) {
 
   app.lock_texture(texture, &pixels, &pitch);
 
+  std::vector<Shape *> shapes;
+
   Rectangle rect(50, 50, 32, 32);
-  // rect.draw(pixels, pitch);
-  rect.animate(pixels, pitch, 640, 480);
+  Circle circle(100, 100, 50, 50);
+
+  shapes.push_back(&rect);
+  shapes.push_back(&circle);
 
   app.unlock_texture(texture);
 
-  app.main_loop(window, renderer, texture, rect, true);
+  app.main_loop(window, renderer, texture, shapes, true);
 
   return 0;
 }

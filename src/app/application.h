@@ -1,11 +1,12 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "../components/rect/rectangle.h"
+#include "../components/shape/shape.h"
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
 #include <cstddef>
 #include <iostream>
+#include <vector>
 
 class Application {
 public:
@@ -14,7 +15,8 @@ public:
 
   int init();
   void main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                 SDL_Texture *texture, Rectangle &rect, bool animate);
+                 SDL_Texture *texture, std::vector<Shape *> &shapes,
+                 bool animate);
   void lock_texture(SDL_Texture *texture, void **pixels, int *pitch);
   void unlock_texture(SDL_Texture *texture);
 
