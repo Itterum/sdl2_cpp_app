@@ -10,6 +10,7 @@ Application::Application(int w, int h, std::string t) {
   title = std::move(t);
   init();
 }
+
 Application::~Application() {
   glfwDestroyWindow(window);
   glfwTerminate();

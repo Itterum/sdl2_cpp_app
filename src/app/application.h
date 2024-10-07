@@ -1,27 +1,27 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef SHAPE_H
+#define SHAPE_H
 
-#include <GLFW/glfw3.h>
-#include "../components/shape/shape.h"
-#include <string>
-#include <vector>
-
-class Application {
+class Shape {
 public:
-  Application(int width, int height, std::string title);
-  ~Application();
+  virtual ~Shape() = default;
+  virtual void draw() = 0;
+  virtual void animate(int window_width, int window_height);
 
-  void init();
-  void main_loop(std::vector<Shape *> &shapes, bool animate) const;
+  int get_point_x() const { return point_x; }
+  int get_point_y() const { return point_y; }
+  int get_width() const { return width; }
+  int get_height() const { return height; }
 
-  GLFWwindow *create_window() const;
-  GLFWwindow *get_window() const { return window; }
+  void set_point_x(int x) { point_x = x; }
+  void set_point_y(int y) { point_y = y; }
+  void set_width(int w) { width = w; }
+  void set_height(int h) { height = h; }
 
-private:
-  int width;
-  int height;
-  std::string title;
-  GLFWwindow *window{};
+protected:
+  int point_x = 0;
+  int point_y = 0;
+  int width = 0;
+  int height = 0;
 };
 
 #endif
