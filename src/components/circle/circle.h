@@ -2,17 +2,14 @@
 #define CIRCLE_H
 
 #include "../shape/shape.h"
-#include <cairo/cairo.h>
-#include <iostream>
-#include <cmath>
 
-class Circle : public Shape {
+class Circle final : public Shape {
 public:
-  Circle(int x, int y, int w, int h);
-  ~Circle();
+  Circle(float x, float y, float w, float h);
+  ~Circle() override;
 
-  void shape(cairo_t *cr) override;
-  void animate(void *pixels, int pitch, int window_width, int window_height) override;
+  void draw() override;
+  void animate(float window_width, float window_height) override;
 };
 
 #endif

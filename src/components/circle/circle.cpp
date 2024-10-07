@@ -1,41 +1,62 @@
 #include "circle.h"
+#include <GLFW/glfw3.h>
+#include <cmath>
 
-Circle::Circle(int x, int y, int w, int h) {
-  point_x = x;
-  point_y = y;
-  width = w;
-  height = h;
+Circle::Circle(const float x, const float y, const float w, const float h) {
+  set_point_x(x);
+  set_point_y(y);
+  set_width(w);
+  set_height(h);
 }
 
-Circle::~Circle() {}
+Circle::~Circle() = default;
 
-void Circle::shape(cairo_t *cr) {
-  cairo_set_source_rgb(cr, 0.0, 0.0, 1.0); // Установим цвет (синий)
+void Circle::draw() {
+  glColor3f(0.0f, 0.0f, 1.0f);
 
-  double radius = width / 2.0; // Радиус круга, можно взять ширину для расчета
-  double center_x = point_x + radius; // Центр круга по оси X
-  double center_y = point_y + radius; // Центр круга по оси Y
+  const float radius = width / 2;
+  const float center_x = point_x + radius;
+  const float center_y = point_y + radius;
+  constexpr int num_segments = 360;
 
-  cairo_arc(cr, center_x, center_y, radius, 0, 2 * M_PI); // Рисуем круг
-  cairo_fill(cr); // Заполняем круг цветом
+  constexpr float theta = M_PI * 2 / static_cast<float>(num_segments);
+  const float tang_factor = tanf(theta);
+
+  const float radial_factor = cosf(theta);
+
+  float x = radius;
+  float y = 0;
+
+  glLineWidth(2);
+  glBegin(GL_POLYGON);
+  for (int ii = 0; ii < num_segments; ii++) {
+    glVertex2f(x + center_x, y + center_y);
+
+    const float tx = -y;
+    const float ty = x;
+
+    x += tx * tang_factor;
+    y += ty * tang_factor;
+
+    x *= radial_factor;
+    y *= radial_factor;
+  }
+  glEnd();
 }
 
-void Circle::animate(void *pixels, int pitch, int window_width,
-                     int window_height) {
-  static double angle = 0.0;
-  static int center_x = window_width / 2;
-  static int center_y = window_height / 2;
-  static int radius = 100;
+void Circle::animate(const float window_width, const float window_height) {
+  static float angle = 0.0;
+  static float center_x = window_width / 2;
+  static float center_y = window_height / 2;
+  static float radius = 100;
 
-  // Вычисляем положение объекта по синусоиде
-  int x = center_x + static_cast<int>(radius * std::cos(angle));
-  int y = center_y + static_cast<int>(radius * std::sin(angle));
+  const auto x = center_x + radius * std::cos(angle);
+  const auto y = center_y + radius * std::sin(angle);
 
   set_point_x(x);
   set_point_y(y);
 
-  angle += 0.05; // Угол увеличивается для движения по окружности
+  angle += 0.05;
 
-  // Обновляем экран
-  draw(pixels, pitch);
+  draw();
 }
