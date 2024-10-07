@@ -2,12 +2,11 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
-#include <utility>
 
-Application::Application(int w, int h, std::string t) {
-  width = w;
-  height = h;
-  title = std::move(t);
+Application::Application(int width, int height, char *title) {
+  w_width = width;
+  w_height = height;
+  w_title = title;
   init();
 }
 Application::~Application() {
@@ -26,7 +25,7 @@ void Application::init() {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0, width, height, 0, -1, 1);
+  glOrtho(0, w_width, w_height, 0, -1, 1);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 }
@@ -40,7 +39,7 @@ void Application::main_loop(std::vector<Shape *> &shapes,
 
     if (animate) {
       for (Shape *shape : shapes) {
-        shape->animate(width, height);
+        shape->animate(w_width, w_height);
       }
     }
 
@@ -54,7 +53,7 @@ void Application::main_loop(std::vector<Shape *> &shapes,
 
 GLFWwindow *Application::create_window() const {
   GLFWwindow *window =
-      glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+      glfwCreateWindow(w_width, w_height, w_title.c_str(), nullptr, nullptr);
 
   if (!window) {
     std::cerr << "Failed to create GLFW window" << std::endl;

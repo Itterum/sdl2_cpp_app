@@ -1,14 +1,14 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <GLFW/glfw3.h>
 #include "../components/shape/shape.h"
+#include <GLFW/glfw3.h>
 #include <string>
 #include <vector>
 
 class Application {
 public:
-  Application(int width, int height, std::string title);
+  Application(int width, int height, char *title);
   ~Application();
 
   void init();
@@ -18,9 +18,9 @@ public:
   GLFWwindow *get_window() const { return window; }
 
 private:
-  int width;
-  int height;
-  std::string title;
+  int w_width;
+  int w_height;
+  std::string w_title;
   GLFWwindow *window{};
 };
 
