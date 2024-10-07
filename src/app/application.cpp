@@ -3,7 +3,8 @@
 #include <iostream>
 #include <thread>
 
-Application::Application(int width, int height, char *title) {
+Application::Application(const int width, const int height,
+                         const std::string &title) {
   w_width = width;
   w_height = height;
   w_title = title;
@@ -40,7 +41,8 @@ void Application::main_loop(std::vector<Shape *> &shapes,
 
     if (animate) {
       for (Shape *shape : shapes) {
-        shape->animate(w_width, w_height);
+        shape->animate(static_cast<float>(w_width),
+                       static_cast<float>(w_height));
       }
     }
 

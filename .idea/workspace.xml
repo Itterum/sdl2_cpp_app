@@ -23,7 +23,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92694713-a1a5-46a0-a54b-3a1f06a59cc2" name="Changes" comment="" />
+    <list default="true" id="92694713-a1a5-46a0-a54b-3a1f06a59cc2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rect/rectangle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rect/rectangle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rect/rectangle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rect/rectangle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shape/shape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shape/shape.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shape/shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shape/shape.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +74,7 @@
     "cf.advertisement.text.overridden": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/ivanl/CLionProjects/sdl2_cpp_app",
     "node.js.detected.package.eslint": "true",

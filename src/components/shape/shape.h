@@ -5,23 +5,23 @@ class Shape {
 public:
   virtual ~Shape() = default;
   virtual void draw() = 0;
-  virtual void animate(int window_width, int window_height);
+  virtual void animate(float window_width, float window_height);
 
-  int get_point_x() const { return point_x; }
-  int get_point_y() const { return point_y; }
-  int get_width() const { return width; }
-  int get_height() const { return height; }
+  float get_point_x() const { return point_x; }
+  float get_point_y() const { return point_y; }
+  float get_width() const { return width; }
+  float get_height() const { return height; }
 
-  void set_point_x(int x) { point_x = x; }
-  void set_point_y(int y) { point_y = y; }
-  void set_width(int w) { width = w; }
-  void set_height(int h) { height = h; }
+  void set_point_x(const float x) { point_x = x; }
+  void set_point_y(const float y) { point_y = y; }
+  void set_width(const float w) { width = w; }
+  void set_height(const float h) { height = h; }
 
 protected:
-  int point_x = 0;
-  int point_y = 0;
-  int width = 0;
-  int height = 0;
+  float point_x = 0;
+  float point_y = 0;
+  float width = 0;
+  float height = 0;
 };
 
 #endif

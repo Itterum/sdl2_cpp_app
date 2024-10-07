@@ -5,11 +5,11 @@
 
 class Rectangle final : public Shape {
 public:
-  Rectangle(int x, int y, int w, int h);
+  Rectangle(float x, float y, float w, float h);
   ~Rectangle() override;
 
   void draw() override;
-  void animate(int window_width, int window_height) override;
+  void animate(float window_width, float window_height) override;
 };
 
 #endif

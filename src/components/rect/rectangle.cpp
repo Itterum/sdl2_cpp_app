@@ -1,7 +1,8 @@
 #include "rectangle.h"
 #include <GLFW/glfw3.h>
 
-Rectangle::Rectangle(const int x, const int y, const int w, const int h) {
+Rectangle::Rectangle(const float x, const float y, const float w,
+                     const float h) {
   set_point_x(x);
   set_point_y(y);
   set_width(w);
@@ -21,9 +22,9 @@ void Rectangle::draw() {
   glEnd();
 }
 
-void Rectangle::animate(const int window_width, const int window_height) {
-  static int dx = 2;
-  static int dy = 2;
+void Rectangle::animate(const float window_width, const float window_height) {
+  static float dx = 2;
+  static float dy = 2;
 
   set_point_x(get_point_x() + dx);
   set_point_y(get_point_y() + dy);

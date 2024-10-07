@@ -8,7 +8,7 @@
 
 class Application {
 public:
-  Application(int width, int height, char *title);
+  Application(int width, int height, const std::string& title);
   ~Application();
 
   void init();
