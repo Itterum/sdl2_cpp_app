@@ -1,37 +1,27 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef SHAPE_H
+#define SHAPE_H
 
-#include "../components/shape/shape.h"
-#include <SDL2/SDL.h>
-#include <cstddef>
-#include <iostream>
-#include <vector>
-
-class Application {
+class Shape {
 public:
-  Application(int width, int height, const char *title);
-  ~Application();
+  virtual ~Shape() = default;
+  virtual void draw() = 0;
+  virtual void animate(int window_width, int window_height);
 
-  void init();
-  void main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                 SDL_Texture *texture, std::vector<Shape *> &shapes,
-                 bool animate);
-  void lock_texture(SDL_Texture *texture, void **pixels, int *pitch);
-  void unlock_texture(SDL_Texture *texture);
+  int get_point_x() const { return point_x; }
+  int get_point_y() const { return point_y; }
+  int get_width() const { return width; }
+  int get_height() const { return height; }
 
-  SDL_Window *create_window();
-  SDL_Renderer *create_sdl_renderer(SDL_Window *window);
-  SDL_Texture *create_sdl_texture(SDL_Renderer *render);
+  void set_point_x(int x) { point_x = x; }
+  void set_point_y(int y) { point_y = y; }
+  void set_width(int w) { width = w; }
+  void set_height(int h) { height = h; }
 
-  void *getPixels() const { return pixels; }
-  int getPitch() const { return pitch; }
-
-private:
-  void *pixels = nullptr;
-  int pitch, w_height, w_width = 0;
-  std::string w_title;
-  SDL_Window *window = nullptr;
-  SDL_Renderer *renderer = nullptr;
+protected:
+  int point_x = 0;
+  int point_y = 0;
+  int width = 0;
+  int height = 0;
 };
 
 #endif

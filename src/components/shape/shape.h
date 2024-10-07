@@ -1,14 +1,11 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <SDL2/SDL.h>
-
 class Shape {
 public:
-  void draw(SDL_Renderer *renderer);
-  virtual void animate(SDL_Renderer *renderer, int window_width,
-                       int window_height);
-  virtual void shape(SDL_Renderer *renderer) = 0;
+  virtual ~Shape() = default;
+  virtual void draw() = 0;
+  virtual void animate(int window_width, int window_height);
 
   int get_point_x() const { return point_x; }
   int get_point_y() const { return point_y; }

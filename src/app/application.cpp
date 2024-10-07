@@ -1,122 +1,67 @@
 #include "application.h"
+#include <chrono>
+#include <iostream>
+#include <thread>
+#include <utility>
 
-Application::Application(const int width, const int height, const char *title) {
-  w_width = width;
-  w_height = height;
-  w_title = title;
+Application::Application(int w, int h, std::string t) {
+  width = w;
+  height = h;
+  title = std::move(t);
   init();
 }
 
 Application::~Application() {
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+  glfwDestroyWindow(window);
+  glfwTerminate();
 }
 
 void Application::init() {
-  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+  if (!glfwInit()) {
+    std::cerr << "Failed to initialize GLFW" << std::endl;
   }
+
+  window = create_window();
+
+  glfwMakeContextCurrent(window);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(0, width, height, 0, -1, 1);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 }
 
-void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
-                            SDL_Texture *texture, std::vector<Shape *> &shapes,
-                            bool animate) {
-  bool quit = false;
-  SDL_Event e;
+void Application::main_loop(std::vector<Shape *> &shapes,
+                            const bool animate) const {
+  while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
 
-  while (!quit) {
-    // handle event SDL
-    while (SDL_PollEvent(&e)) {
-      if (e.type == SDL_QUIT) {
-        quit = true;
-      }
-    }
-
-    void *pixels = getPixels();
-    int pitch = getPitch();
-
-    lock_texture(texture, &pixels, &pitch);
-
-    memset(pixels, 0, w_height * pitch);
+    glClear(GL_COLOR_BUFFER_BIT);
 
     if (animate) {
       for (Shape *shape : shapes) {
-        shape->animate(renderer, w_width, w_height);
+        shape->animate(width, height);
       }
     }
 
-    unlock_texture(texture);
+    glfwSwapBuffers(window);
 
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, nullptr, nullptr);
-    SDL_RenderPresent(renderer);
-
-    SDL_Delay(10);
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
-  SDL_DestroyTexture(texture);
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+  glfwDestroyWindow(window);
 }
 
-SDL_Window *Application::create_window() {
-  SDL_Window *window = SDL_CreateWindow(w_title.c_str(), 100, 100, w_width,
-                                        w_height, SDL_WINDOW_SHOWN);
+GLFWwindow *Application::create_window() const {
+  GLFWwindow *window =
+      glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
-  if (window == nullptr) {
-    std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
-    SDL_Quit();
+  if (!window) {
+    std::cerr << "Failed to create GLFW window" << std::endl;
+    glfwTerminate();
+    return nullptr;
   }
 
   return window;
-}
-
-SDL_Renderer *Application::create_sdl_renderer(SDL_Window *window) {
-  SDL_Renderer *renderer =
-      SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-  if (renderer == nullptr) {
-    std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-  }
-
-  return renderer;
-}
-
-SDL_Texture *Application::create_sdl_texture(SDL_Renderer *renderer) {
-  SDL_Texture *texture =
-      SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
-                        SDL_TEXTUREACCESS_STREAMING, w_width, w_height);
-
-  if (texture == nullptr) {
-    std::cerr << "SDL_CreateTexture Error: " << SDL_GetError() << std::endl;
-    SDL_DestroyRenderer(renderer);
-    SDL_Quit();
-  }
-
-  return texture;
-}
-
-void Application::lock_texture(SDL_Texture *texture, void **pixels,
-                               int *pitch) {
-  if (texture == nullptr) {
-    std::cerr << "Texture is null!" << std::endl;
-    return;
-  }
-
-  if (SDL_LockTexture(texture, nullptr, pixels, pitch) < 0) {
-    std::cerr << "SDL_LockTexture Error: " << SDL_GetError() << std::endl;
-  }
-}
-
-void Application::unlock_texture(SDL_Texture *texture) {
-  if (texture == nullptr) {
-    std::cerr << "Texture is null!" << std::endl;
-    return;
-  }
-
-  SDL_UnlockTexture(texture);
 }

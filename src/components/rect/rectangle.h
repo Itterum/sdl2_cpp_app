@@ -2,16 +2,14 @@
 #define RECTANGLE_H
 
 #include "../shape/shape.h"
-#include <SDL2/SDL.h>
-#include <cmath>
-#include <iostream>
 
-class Rectangle : public Shape {
+class Rectangle final : public Shape {
 public:
   Rectangle(int x, int y, int w, int h);
-  ~Rectangle();
+  ~Rectangle() override;
 
-  void shape(SDL_Renderer *renderer) override;
+  void draw() override;
+  void animate(int window_width, int window_height) override;
 };
 
 #endif
