@@ -7,6 +7,11 @@ set(CMAKE_CXX_STANDARD 11)
 if (UNIX)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(SDL2 REQUIRED sdl2)
+
+    include_directories(${SDL2_INCLUDE_DIRS})
+    link_directories(${SDL2_LIBRARY_DIRS})
+
+    set(LINK_LIBS ${SDL2_LIBRARIES})
 else (WIN32)
     set(SDL_DIR "C:\\tools\\SDL2-devel-2.30.8-mingw\\SDL2-2.30.8\\x86_64-w64-mingw32")
 
@@ -19,7 +24,6 @@ else (WIN32)
 endif ()
 
 include_directories(
-        ${SDL_INCLUDE}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/src/app
         ${CMAKE_SOURCE_DIR}/src/components
@@ -37,6 +41,6 @@ add_executable(
         #        src/components/circle/circle.cpp
 )
 
-target_link_libraries(main ${SDL_LIB})
+target_link_libraries(main ${LINK_LIBS})
 
-message(STATUS "SDL2 Libraries: ${SDL_LIB}")
+message(STATUS "SDL2 Libraries: ${LINK_LIBS}")
