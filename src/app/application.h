@@ -3,17 +3,16 @@
 
 #include "../components/shape/shape.h"
 #include <SDL2/SDL.h>
-#include <cairo/cairo.h>
 #include <cstddef>
 #include <iostream>
 #include <vector>
 
 class Application {
 public:
-  Application();
+  Application(int width, int height, const char *title);
   ~Application();
 
-  int init();
+  void init();
   void main_loop(SDL_Window *window, SDL_Renderer *renderer,
                  SDL_Texture *texture, std::vector<Shape *> &shapes,
                  bool animate);
@@ -29,7 +28,10 @@ public:
 
 private:
   void *pixels = nullptr;
-  int pitch = 0;
+  int pitch, w_height, w_width = 0;
+  std::string w_title;
+  SDL_Window *window = nullptr;
+  SDL_Renderer *renderer = nullptr;
 };
 
 #endif

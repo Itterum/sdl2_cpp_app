@@ -1,9 +1,9 @@
 #include "app/application.h"
-#include "components/circle/circle.h"
+// #include "components/circle/circle.h"
 #include "components/rect/rectangle.h"
 
 int main(int argc, char *argv[]) {
-  Application app;
+  Application app(800, 600, "SDL App");
 
   SDL_Window *window = app.create_window();
   SDL_Renderer *renderer = app.create_sdl_renderer(window);
@@ -22,10 +22,10 @@ int main(int argc, char *argv[]) {
   std::vector<Shape *> shapes;
 
   Rectangle rect(50, 50, 32, 32);
-  Circle circle(100, 100, 50, 50);
+  // Circle circle(100, 100, 50, 50);
 
   shapes.push_back(&rect);
-  shapes.push_back(&circle);
+  // shapes.push_back(&circle);
 
   app.unlock_texture(texture);
 

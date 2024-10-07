@@ -2,7 +2,7 @@
 #define RECTANGLE_H
 
 #include "../shape/shape.h"
-#include <cairo/cairo.h>
+#include <SDL2/SDL.h>
 #include <cmath>
 #include <iostream>
 
@@ -11,7 +11,7 @@ public:
   Rectangle(int x, int y, int w, int h);
   ~Rectangle();
 
-  void shape(cairo_t *cr) override;
+  void shape(SDL_Renderer *renderer) override;
 };
 
 #endif

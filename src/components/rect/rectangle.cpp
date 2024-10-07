@@ -9,8 +9,8 @@ Rectangle::Rectangle(int x, int y, int w, int h) {
 
 Rectangle::~Rectangle() {}
 
-void Rectangle::shape(cairo_t *cr) {
-  cairo_set_source_rgb(cr, 1.0, 0.0, 0.0);
-  cairo_rectangle(cr, point_x, point_y, width, height);
-  cairo_fill(cr);
+void Rectangle::shape(SDL_Renderer *renderer) {
+  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  constexpr SDL_Rect rect = {100, 100, 200, 150};
+  SDL_RenderFillRect(renderer, &rect);
 }

@@ -1,21 +1,22 @@
 #include "application.h"
 
-Application::Application() { init(); }
+Application::Application(const int width, const int height, const char *title) {
+  w_width = width;
+  w_height = height;
+  w_title = title;
+  init();
+}
 
 Application::~Application() {
-  if (pixels) {
-    free(pixels);
-  }
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
   SDL_Quit();
 }
 
-int Application::init() {
+void Application::init() {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
-    return 1;
   }
-
-  return 0;
 }
 
 void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
@@ -37,18 +38,18 @@ void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
 
     lock_texture(texture, &pixels, &pitch);
 
-    memset(pixels, 0, 480 * pitch);
+    memset(pixels, 0, w_height * pitch);
 
     if (animate) {
       for (Shape *shape : shapes) {
-        shape->animate(pixels, pitch, 640, 480);
+        shape->animate(renderer, w_width, w_height);
       }
     }
 
     unlock_texture(texture);
 
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, texture, nullptr, nullptr);
     SDL_RenderPresent(renderer);
 
     SDL_Delay(10);
@@ -61,8 +62,8 @@ void Application::main_loop(SDL_Window *window, SDL_Renderer *renderer,
 }
 
 SDL_Window *Application::create_window() {
-  SDL_Window *window =
-      SDL_CreateWindow("Cairo with SDL2", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+  SDL_Window *window = SDL_CreateWindow(w_title.c_str(), 100, 100, w_width,
+                                        w_height, SDL_WINDOW_SHOWN);
 
   if (window == nullptr) {
     std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -88,7 +89,7 @@ SDL_Renderer *Application::create_sdl_renderer(SDL_Window *window) {
 SDL_Texture *Application::create_sdl_texture(SDL_Renderer *renderer) {
   SDL_Texture *texture =
       SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
-                        SDL_TEXTUREACCESS_STREAMING, 640, 480);
+                        SDL_TEXTUREACCESS_STREAMING, w_width, w_height);
 
   if (texture == nullptr) {
     std::cerr << "SDL_CreateTexture Error: " << SDL_GetError() << std::endl;
@@ -106,7 +107,7 @@ void Application::lock_texture(SDL_Texture *texture, void **pixels,
     return;
   }
 
-  if (SDL_LockTexture(texture, NULL, pixels, pitch) < 0) {
+  if (SDL_LockTexture(texture, nullptr, pixels, pitch) < 0) {
     std::cerr << "SDL_LockTexture Error: " << SDL_GetError() << std::endl;
   }
 }
