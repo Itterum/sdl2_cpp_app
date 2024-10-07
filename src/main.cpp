@@ -1,5 +1,5 @@
-#include <app/application.h>
-#include <components/rect/rectangle.h>
+#include "app/application.h"
+#include "components/rect/rectangle.h"
 
 int main() {
   const Application app(800, 600, "Game Engine");

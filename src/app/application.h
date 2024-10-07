@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 #include <GLFW/glfw3.h>
-#include <components/shape/shape.h>
+#include "../components/shape/shape.h"
 #include <string>
 #include <vector>
 
