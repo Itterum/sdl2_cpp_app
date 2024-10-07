@@ -5,6 +5,7 @@ project(c_apps)
 set(CMAKE_CXX_STANDARD 11)
 
 if (UNIX)
+    find_package(OpenGL REQUIRED)
     find_package(glfw3 REQUIRED)
 else (WIN32)
     set(GLFW_DIR "C:\\tools\\glfw-3.4.bin.WIN64")
