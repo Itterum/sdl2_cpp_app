@@ -1,17 +1,15 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include "../shape/shape.h"
-#include <cairo/cairo.h>
-#include <cmath>
-#include <iostream>
+#include <components/shape/shape.h>
 
-class Rectangle : public Shape {
+class Rectangle final : public Shape {
 public:
   Rectangle(int x, int y, int w, int h);
-  ~Rectangle();
+  ~Rectangle() override;
 
-  void shape(cairo_t *cr) override;
+  void draw() override;
+  void animate(int window_width, int window_height) override;
 };
 
 #endif

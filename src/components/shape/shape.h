@@ -1,13 +1,11 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <cairo/cairo.h>
-
 class Shape {
 public:
-  void draw(void *pixels, int pitch);
-  virtual void animate(void *pixels, int pitch, int window_width, int window_height);
-  virtual void shape(cairo_t *cr) = 0;
+  virtual ~Shape() = default;
+  virtual void draw() = 0;
+  virtual void animate(int window_width, int window_height);
 
   int get_point_x() const { return point_x; }
   int get_point_y() const { return point_y; }
@@ -20,10 +18,10 @@ public:
   void set_height(int h) { height = h; }
 
 protected:
-  int point_x;
-  int point_y;
-  int width;
-  int height;
+  int point_x = 0;
+  int point_y = 0;
+  int width = 0;
+  int height = 0;
 };
 
 #endif

@@ -4,31 +4,51 @@ project(c_apps)
 
 set(CMAKE_CXX_STANDARD 11)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(CAIRO REQUIRED cairo)
-pkg_check_modules(SDL2 REQUIRED sdl2)
+if (UNIX)
+    find_package(glfw3 REQUIRED)
+else (WIN32)
+    set(GLFW_DIR "C:\\tools\\glfw-3.4.bin.WIN64")
+
+    find_package(OpenGL REQUIRED)
+    find_library(GLFW_LIB NAMES glfw3 HINTS "${GLFW_DIR}\\lib-mingw-w64")
+    include_directories("${GLFW_DIR}\\include")
+
+    if (NOT GLFW_LIB)
+        message(FATAL_ERROR "GLFW not found!")
+    endif ()
+endif ()
 
 include_directories(
-  ${CAIRO_INCLUDE_DIRS}
-  ${SDL2_INCLUDE_DIRS}
-  ${CMAKE_SOURCE_DIR}/src
-  ${CMAKE_SOURCE_DIR}/src/app
-  ${CMAKE_SOURCE_DIR}/src/components
-  ${CMAKE_SOURCE_DIR}/src/components/rect
-  ${CMAKE_SOURCE_DIR}/src/components/shape
-  ${CMAKE_SOURCE_DIR}/src/components/circle
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/src/app
+        ${CMAKE_SOURCE_DIR}/src/components/shape
+        ${CMAKE_SOURCE_DIR}/src/components/rect
 )
 
 add_executable(
-  main
-  src/main.cpp
-  src/app/application.cpp
-  src/components/shape/shape.cpp
-  src/components/rect/rectangle.cpp
-  src/components/circle/circle.cpp
+        main
+        src/main.cpp
+        src/app/application.cpp
+        src/components/shape/shape.cpp
+        src/components/rect/rectangle.cpp
 )
 
-target_link_libraries(main ${CAIRO_LIBRARIES} ${SDL2_LIBRARIES})
+if (UNIX)
+    target_link_libraries(
+            main
+            ${OPENGL_LIBRARIES}
+            glfw ${GLM_LIBRARIES}
+    )
+elseif (WIN32)
+    target_link_libraries(
+            #            main
+            #            ${OPENGL_LIBRARIES}
+            #            ${GLFW_LIB}
+            main
+            ${OPENGL_LIBRARIES}
+            ${GLFW_LIB} ${GLM_LIBRARIES}
+    )
+endif ()
 
-message(STATUS "Cairo Libraries: ${CAIRO_LIBRARIES}")
-message(STATUS "SDL2 Libraries: ${SDL2_LIBRARIES}")
+message(STATUS "OpenGL Libraries: ${OPENGL_LIBRARIES}")
+message(STATUS "GLFW Library: ${GLFW_LIB}")
