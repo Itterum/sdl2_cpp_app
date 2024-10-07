@@ -4,6 +4,10 @@ project(c_apps)
 
 set(CMAKE_CXX_STANDARD 11)
 
+if (WIN32)
+    set(CMAKE_WIN32_EXECUTABLE OFF)
+endif ()
+
 if (UNIX)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(SDL2 REQUIRED sdl2)
@@ -15,12 +19,14 @@ if (UNIX)
 else (WIN32)
     set(SDL_DIR "C:\\tools\\SDL2-devel-2.30.8-mingw\\SDL2-2.30.8\\x86_64-w64-mingw32")
 
-    find_library(SDL_LIB NAMES libSDL2 HINTS "${SDL_DIR}\\lib")
-    include_directories(SDL_INCLUDE "${SDL_DIR}\\include")
+    find_library(SDL_LIBS NAMES libSDL2 HINTS "${SDL_DIR}\\lib")
+    include_directories("${SDL_DIR}\\include")
 
-    if (NOT SDL_LIB)
+    if (NOT SDL_LIBS)
         message(FATAL_ERROR "SDL2 not found!")
     endif ()
+
+    set(LINK_LIBS ${SDL_LIBS})
 endif ()
 
 include_directories(
