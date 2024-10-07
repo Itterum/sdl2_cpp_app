@@ -9,6 +9,7 @@ Application::Application(int width, int height, char *title) {
   w_title = title;
   init();
 }
+
 Application::~Application() {
   glfwDestroyWindow(window);
   glfwTerminate();
