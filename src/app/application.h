@@ -1,7 +1,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "../components/shape/shape.h"
+#include <components/shape/shape.h>
 #include <GLFW/glfw3.h>
 #include <string>
 #include <vector>

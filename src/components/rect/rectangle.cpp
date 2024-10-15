@@ -1,4 +1,4 @@
-#include "rectangle.h"
+#include <rectangle.h>
 #include <GLFW/glfw3.h>
 
 Rectangle::Rectangle(const float x, const float y, const float w,

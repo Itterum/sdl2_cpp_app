@@ -1,4 +1,4 @@
-#include "circle.h"
+#include <circle.h>
 #include <GLFW/glfw3.h>
 #include <cmath>
 

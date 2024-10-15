@@ -1,4 +1,4 @@
-#include "shape.h"
+#include <shape.h>
 
 void Shape::animate(const float window_width, const float window_height) {
   static float dx = 2;
