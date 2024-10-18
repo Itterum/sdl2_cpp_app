@@ -1,4 +1,5 @@
 #include <application.h>
+
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -50,8 +51,6 @@ void Application::main_loop(std::vector<Shape *> &shapes,
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
-
-  glfwDestroyWindow(window);
 }
 
 GLFWwindow *Application::create_window() const {
