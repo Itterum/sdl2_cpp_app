@@ -26,12 +26,12 @@
     <list default="true" id="92694713-a1a5-46a0-a54b-3a1f06a59cc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/circle/circle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circle/circle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/circle/circle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circle/circle.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rect/rectangle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rect/rectangle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rect/rectangle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rect/rectangle.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/shape/shape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shape/shape.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shape/shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shape/shape.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +130,9 @@
       <workItem from="1728338056224" duration="12000" />
       <workItem from="1728338138266" duration="3000" />
       <workItem from="1729013007833" duration="313000" />
-      <workItem from="1729013340102" duration="409000" />
+      <workItem from="1729013340102" duration="2303000" />
+      <workItem from="1729168901726" duration="3900000" />
+      <workItem from="1729248760233" duration="4394000" />
     </task>
     <task id="LOCAL-00001" summary="first step forward to opengl">
       <option name="closed" value="true" />
@@ -164,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728326200118</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="small changes">
+      <option name="closed" value="true" />
+      <created>1729013774256</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729013774256</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +193,8 @@
     <MESSAGE value="small fix" />
     <MESSAGE value="modify gitignore" />
     <MESSAGE value="fix circle class" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix circle class" />
+    <MESSAGE value="small changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

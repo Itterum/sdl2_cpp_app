@@ -44,6 +44,10 @@ void Application::main_loop(std::vector<Shape *> &shapes,
       for (Shape *shape : shapes) {
         shape->animate(static_cast<float>(w_width),
                        static_cast<float>(w_height));
+
+        // std::cout << "Shape: " << shape->get_name() << "\n"
+        //           << "Point x: " << shape->get_point_x() << '\n'
+        //           << "Point y: " << shape->get_point_y() << '\n';
       }
     }
 

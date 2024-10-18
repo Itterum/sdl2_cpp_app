@@ -10,6 +10,7 @@ public:
 
   void draw() override;
   void animate(float window_width, float window_height) override;
+  std::string get_name() const override;
 };
 
 #endif

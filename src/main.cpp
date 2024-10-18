@@ -4,7 +4,7 @@
 #include <components/circle/circle.h>
 
 int main() {
-  const Application app(800, 600, "Game Engine");
+  const Application app(800, 600, "OpenGL App");
 
   Rectangle rect(50, 50, 32, 32);
   Circle circle(100, 100, 50, 50);
